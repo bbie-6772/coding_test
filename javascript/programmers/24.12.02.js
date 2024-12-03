@@ -34,7 +34,6 @@ function solution(babbling) {
     // 근데 나중에 보니까 replaceAll 이라는 좋은 구문이 있더라
 }
 
-
 // 다른 코드 분석
 function solution(babbling) {
     //옹알이를 정규식을 이용해 반복 여부 확인
@@ -46,4 +45,48 @@ function solution(babbling) {
         // 반복되지 않고 옹알이로 단어가 나눠지면 +1 아닐경우 그대로
         !regexp1.test(word) && regexp2.test(word) ? ++ans : ans
     ), 0);
+}
+
+// 숫자 짝꿍
+/*
+두 정수 X, Y의 임의의 자리에서 공통으로 나타나는 정수 k(0 ≤ k ≤ 9)들을 이용하여 만들 수 있는 가장 큰 정수를 두 수의 짝꿍이라 합니다
+(단, 공통으로 나타나는 정수 중 서로 짝지을 수 있는 숫자만 사용합니다). 
+X, Y의 짝꿍이 존재하지 않으면, 짝꿍은 -1입니다. X, Y의 짝꿍이 0으로만 구성되어 있다면, 짝꿍은 0입니다.
+*/
+
+function solution(X, Y) {
+    let answer = [];
+
+    for (let i = 0; i < 10; i++) {
+        let xcount = 0;
+        let ycount = 0;
+        X.replaceAll(i, () => { xcount++ })
+        Y.replaceAll(i, () => { ycount++ })
+        for (let y = 0; y < Math.min(xcount, ycount); y++) {
+            answer.push(i)
+        }
+    }
+    if (answer.length === 0) answer = -1
+    else answer = answer.sort((a, b) => +b - +a).join("")
+    if (+answer === 0) answer = 0
+
+    return "" + answer
+}
+
+// 최적화 실패 버전
+
+function solution(babbling) {
+    let answer = '';
+    
+    answer = X.split("").filter((e) => {
+        if (Y.includes(e)) {
+            Y = Y.replace(e,"")
+            return true
+        } else return false
+    }).sort((a,b) => +b - +a).join("")
+    
+    if (answer.length <= 0) answer = -1
+    if (+answer === 0) answer = 0
+    
+    return ""+answer;
 }
