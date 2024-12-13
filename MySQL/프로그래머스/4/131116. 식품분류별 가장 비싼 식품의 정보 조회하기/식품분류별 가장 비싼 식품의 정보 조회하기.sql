@@ -1,0 +1,15 @@
+-- 코드를 입력하세요
+WITH CATEGORY_RANK AS (
+    SELECT  CATEGORY
+            , PRICE
+            , PRODUCT_NAME
+            , RANK() OVER (PARTITION BY CATEGORY ORDER BY PRICE DESC) AS RK
+    FROM    FOOD_PRODUCT
+)
+SELECT  CATEGORY
+        , PRICE
+        , PRODUCT_NAME
+FROM    CATEGORY_RANK
+WHERE   CATEGORY IN ("과자","국","김치","식용유")
+        AND RK = 1
+ORDER BY 2 DESC
