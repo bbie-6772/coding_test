@@ -15,14 +15,14 @@ public class Solution {
             }  
 
             if (!row.Any(x => x == 1)) continue;  
-            bfs(row, i,computers);  
+            dfs(row, i,computers);  
             answer++;
         }
 
         return answer;
     }
     
-    public void bfs(int [] network, int idx, int[,] computers) {
+    public void dfs(int [] network, int idx, int[,] computers) {
         for (int i = 0; i < network.Length;i++) {
             if (network[i] == 0) continue;
             
@@ -32,7 +32,7 @@ public class Solution {
             for (int j = 0; j < computers.GetLength(1); j++) {  
                 next[j] = computers[i, j];  
             }
-            bfs (next, i, computers);
+            dfs (next, i, computers);
         }
     }
     
