@@ -41,12 +41,12 @@ public class Solution {
         }
         
         List<int> answer = new List<int>();
-        var sortedGenres = (from pair in genreTotalPlays orderby pair.Value descending select pair.Key).ToList();
+        var sortedGenres = from pair in genreTotalPlays orderby pair.Value descending select pair.Key;
         
         foreach (string genre in sortedGenres) 
         {
 
-            if (genreTopTracks[genre].Count < 2) 
+            if (genreTopTracks[genre].Count == 1) 
             {
                 answer.Add(genreTopTracks[genre][0]);
                 continue;
